@@ -1,1 +1,1 @@
-# rubens-configurator-debug-client
+# Rubens Configurator debug client
