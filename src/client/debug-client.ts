@@ -7,7 +7,10 @@ const serverUrl = urlParams.get('serverUrl');
 
 export interface DebugValueMapDump {
   type: string;
+  componentId: string;
+  internalId: string;
   id: number;
+  parentId: number;
   values: Record<string, string>;
 }
 
@@ -72,10 +75,23 @@ const changeMapSelection = (change: DebugValueMapChange) => {
   let currentValueMapIndex = 0;
   mapSelection.options.length = 0;
   for (const [, value] of Object.entries(change.valueMaps)) {
+    if (Object.keys(value.values).length === 0 || value.type === 'subpart') {
+      continue;
+    }
     if (currentSelection === value.id.toString()) {
       currentValueMapIndex = mapSelection.options.length;
     }
-    const optionText = `(${value.id}) ${value.type}`;
+    const optionText = `(id: ${value.id}, parentId: ${value.parentId}) ${value.type} ${value.componentId} ${value.internalId}`;
+    addOptionToSelection(mapSelection, optionText, value.id);
+  }
+  for (const [, value] of Object.entries(change.valueMaps)) {
+    if (Object.keys(value.values).length === 0 || value.type !== 'subpart') {
+      continue;
+    }
+    if (currentSelection === value.id.toString()) {
+      currentValueMapIndex = mapSelection.options.length;
+    }
+    const optionText = `(id: ${value.id}, parentId: ${value.parentId}) ${value.type} ${value.componentId} ${value.internalId}`;
     addOptionToSelection(mapSelection, optionText, value.id);
   }
   mapSelection.selectedIndex = currentValueMapIndex;
