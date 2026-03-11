@@ -148,7 +148,7 @@ const createConfigurator = async (htmlElement: HTMLElement, options: any) => {
 };
 
 const id = configurationId ?? 'usm:frame';
-const overrideServerUrl = serverUrl ?? 'https://www.roomle.com/t/bo-mvp/';
+const overrideServerUrl = serverUrl ?? 'https://www.roomle.com/t/bo-test/';
 const options = {
   id,
   overrideServerUrl,
