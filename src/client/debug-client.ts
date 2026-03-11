@@ -1,4 +1,5 @@
-import RoomleConfiguratorApi from '@roomle/embedding-lib';
+// @ts-ignore
+import RubensEmbedding from '@roomle/embedding-lib';
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -138,7 +139,8 @@ const clearTable = (table: HTMLTableElement) => {
 };
 
 const createConfigurator = async (htmlElement: HTMLElement, options: any) => {
-  const configuratorApi = await RoomleConfiguratorApi.createConfigurator(
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  const configuratorApi = await RubensEmbedding.createConfigurator(
     'demoConfigurator',
     htmlElement,
     options,
